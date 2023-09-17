@@ -1,52 +1,35 @@
-import { Lifetime } from "awilix"
-import { Customer, Product, ProductCategory, TransactionBaseService } from "@medusajs/medusa";
-import { IEventBusService } from "@medusajs/types";
+import {Lifetime} from "awilix"
+import {Customer, Product, ProductCategory, TransactionBaseService} from "@medusajs/medusa";
+import {IEventBusService} from "@medusajs/types";
+import axios from "axios";
 
-export default class FeaturesServices extends TransactionBaseService {
-  static LIFE_TIME = Lifetime.SCOPED
-  protected readonly eventBusService_: IEventBusService
+export default class FeaturesService extends TransactionBaseService {
+    static LIFE_TIME = Lifetime.SCOPED
+    protected readonly eventBusService_: IEventBusService;
 
-  constructor(
-      { eventBusService }: { eventBusService: IEventBusService },
-      options: Record<string, unknown>
-  ) {
-    // @ts-ignore
-    super(...arguments)
-    // this.activeManager_.queryRunner.query('');
-    this.eventBusService_ = eventBusService
-  }
+    constructor(
+        {
+            eventBusService,
+        }: {
+            eventBusService: IEventBusService;
+        },
+        options: Record<string, unknown>
+    ) {
+        // @ts-ignore
+        super(...arguments)
 
-  createEmbedding(input: string) {
-    throw new Error('Not implemented');  
-  }
+        this.eventBusService_ = eventBusService;
+    }
 
-  createProductFeatures(product: Product) {
-    throw new Error('Not implemented');
-  }
+    async createEmbedding(input: string) {
+        const axiosResponse = await axios.post(
+            "http://localhost:5000/", `data=${input}`
+        )
+        return axiosResponse?.data?.at(0).join(',') ?? [].join(',');
+    }
 
-  createCustomerFeatures(customer: Customer) {
-    throw new Error('Not implemented');
-  }
+    createCategoryFeatures(category: ProductCategory) {
+        return this.createEmbedding(category.name);
+    }
 
-  createCategoryFeatures(category: ProductCategory) {
-    throw new Error('Not implemented');
-  }
-
-
-  // SELECT AVG(n) FROM (VALUES (1), (2), (3), (4)) AS t(n);
-  queryCalculateListAVG(inputs: any[]) {
-    throw new Error('Not implemented');  
-  }
-
-  selectProductFeaturesForCentroid(product: Product) {
-    throw new Error('Not implemented');  
-  }
-
-  selectCategoryFeaturesForCentroid(category: ProductCategory) {
-    throw new Error('Not implemented');  
-  }
-
-  selectCustomerFeaturesForCentroid(category: ProductCategory) {
-    throw new Error('Not implemented');  
-  }
 }

@@ -1,0 +1,11 @@
+{
+  "name": "transformer",
+  "version": "1.0.0",
+  "description": "Python transformer instance",
+  "scripts": {
+    "start:dev": "poetry run flask --app server run  --debug"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "another-commerce"
+version = "0.1.0"
+description = ""
+authors = ["andrianiaina <finaritrandrianiaina@gmail.com>"]
+readme = "README.md"
+
+
+[tool.poetry.dependencies]
+python = "^3.11"
+bullmq = "1.11.0"
+python-dotenv="1.0.0"
+scikit-learn = "^1.3.0"
+flask = "^2.3.3"
+sentence-transformers = "2.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
