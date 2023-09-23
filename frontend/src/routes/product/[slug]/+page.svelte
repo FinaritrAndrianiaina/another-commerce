@@ -42,7 +42,7 @@
    const handleSelection = (option: any, value: string) => {
       if (!selectedOptions) return false
       selectedOptions[option.id] = value
-      selectedVariantId = findVariant(selectedOptions, product) || 
+      selectedVariantId = findVariant(selectedOptions, product) ||
          product.variants[product.variants.findIndex((variant: any) => variant.options.find((option: any) => option.value === value))].id
       selectedOptions = findSelectedOptions(selectedVariantId, product)
       $v = selectedVariantId
@@ -157,13 +157,13 @@
    <!-- Tabs -->
    <div class="max-w-screen-lg lg:col-span-2">
       <div class="flex" aria-orientation="horizontal" role="tablist">
-         <button type="button" on:click="{() => tab = 'faq'}" class="{tab === 'faq' ? 
-            "whitespace-nowrap p-3 px-4 mr-4 border-b-2 font-medium border-lime-600 text-gray-800" : 
+         <button type="button" on:click="{() => tab = 'faq'}" class="{tab === 'faq' ?
+            "whitespace-nowrap p-3 px-4 mr-4 border-b-2 font-medium border-lime-600 text-gray-800" :
             "whitespace-nowrap p-3 px-4 mr-4 text-gray-500 hover:text-gray-700 border-b border-gray-300 hover:border-b-2 hover:border-gray-300"}">
             FAQ
          </button>
-         <button type="button" on:click="{() => tab = 'other'}" class="{tab === 'other' ? 
-            "whitespace-nowrap p-3 pr-4 mr-4 border-b-2 font-medium border-lime-600 text-gray-800" : 
+         <button type="button" on:click="{() => tab = 'other'}" class="{tab === 'other' ?
+            "whitespace-nowrap p-3 pr-4 mr-4 border-b-2 font-medium border-lime-600 text-gray-800" :
             "whitespace-nowrap p-3 pr-4 mr-4 text-gray-500 hover:text-gray-700 border-b border-gray-300 hover:border-b-2 hover:border-gray-300"}">
             Other Tab
          </button>
