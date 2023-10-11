@@ -13,7 +13,7 @@ export class ProductFeatures1694686932724 implements MigrationInterface {
             "productId" VARCHAR NOT NULL,
             "uniqueName" TEXT NOT NULL,
             "vector" vector(384),
-            "metadata" JSONB NOT NULL,
+            "metadata" JSONB NULL,
         
             CONSTRAINT "product_features_pkey" PRIMARY KEY ("productId")
         )`);

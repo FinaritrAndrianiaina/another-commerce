@@ -9,5 +9,8 @@ app = Flask(__name__)
 
 @app.route("/",methods=['POST'])
 def hash():
-    embeddings = model.encode(request.form["data"])
+    data=request.form["data"]
+    if data is None:
+        data = ''
+    embeddings = model.encode(data)
     return [embeddings.tolist()]

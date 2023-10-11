@@ -13,7 +13,7 @@ export class UserFeatures1694696247438 implements MigrationInterface {
             "customerId" VARCHAR NOT NULL,
             "uniqueName" TEXT NOT NULL,
             "vector" vector(384),
-            "metadata" JSONB NOT NULL,
+            "metadata" JSONB NULL,
         
             CONSTRAINT "user_features_pkey" PRIMARY KEY ("customerId")
         )`);

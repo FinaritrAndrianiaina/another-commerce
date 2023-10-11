@@ -39,11 +39,26 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
         `);
+
+        await queryRunner.query(`
+CREATE OR REPLACE FUNCTION features.trigger_product_data() RETURNS TRIGGER AS $$
+BEGIN
+    PERFORM features.update_product_preference_aggregate(new.id);
+    RETURN new;
+END;
+$$ LANGUAGE plpgsql;
+        `);
         await queryRunner.query(`
 CREATE TRIGGER on_update_product_preference_trigger
   AFTER INSERT OR UPDATE OR DELETE ON public."product_category_product"
     FOR EACH ROW
 EXECUTE FUNCTION features.trigger_product_preference_aggregate();
+        `);
+        await queryRunner.query(`
+CREATE TRIGGER on_update_product_data
+  AFTER INSERT OR UPDATE OR DELETE ON public."product"
+    FOR EACH ROW
+EXECUTE FUNCTION features.trigger_product_data();
         `);
     }
 

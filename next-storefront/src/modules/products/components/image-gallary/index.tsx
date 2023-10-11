@@ -1,6 +1,7 @@
 import { Image as MedusaImage } from "@medusajs/medusa"
 import Image from "next/image"
 import { useRef } from "react"
+import {ImageOrPlaceholder} from "@modules/products/components/thumbnail";
 
 type ImageGalleryProps = {
   images: MedusaImage[]
@@ -33,15 +34,8 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
               }}
             >
               <span className="sr-only">Go to image {index + 1}</span>
-              <Image
-                src={image.url}
-                className="absolute inset-0"
-                alt="Thumbnail"
-                fill
-                sizes="100vw"
-                style={{
-                  objectFit: "cover",
-                }}
+              <ImageOrPlaceholder
+                image={image.url}
               />
             </button>
           )
@@ -56,16 +50,8 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
               className="relative aspect-[29/34] w-full"
               id={image.id}
             >
-              <Image
-                src={image.url}
-                priority={index <= 2 ? true : false}
-                className="absolute inset-0"
-                alt={`Product image ${index + 1}`}
-                fill
-                sizes="100vw"
-                style={{
-                  objectFit: "cover",
-                }}
+              <ImageOrPlaceholder
+                  image={image.url}
               />
             </div>
           )

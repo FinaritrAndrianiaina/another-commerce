@@ -19,7 +19,7 @@ CREATE OR REPLACE FUNCTION features.update_preference_aggregate(customer VARCHAR
           join product_variant on product_variant.id = line_item.variant_id
           join product on product.id = product_variant.product_id
           join features.product_features product_features on product_features."productId" = product.id
-      where public."order".customer_id = 'test';
+      where public."order".customer_id = customer;
   
       -- Update preferenceAggregate for the specified profile
       UPDATE features."customer_features"

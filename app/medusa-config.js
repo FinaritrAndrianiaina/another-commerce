@@ -33,6 +33,9 @@ const DATABASE_URL =
 
 const REDIS_URL = process.env.REDIS_URL || "redis://localhost:6379";
 
+
+const PORT = process.env.PORT || 9000;
+
 const plugins = [
   `medusa-fulfillment-manual`,
   `medusa-payment-manual`,
@@ -55,7 +58,7 @@ const plugins = [
 ];
 
 const modules = {
-  /*eventBus: {
+  eventBus: {
     resolve: "@medusajs/event-bus-redis",
     options: {
       redisUrl: REDIS_URL
@@ -66,7 +69,7 @@ const modules = {
     options: {
       redisUrl: REDIS_URL
     }
-  },*/
+  },
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule["projectConfig"]} */
@@ -77,7 +80,8 @@ const projectConfig = {
   database_url: DATABASE_URL,
   admin_cors: ADMIN_CORS,
   // Uncomment the following lines to enable REDIS
-  // redis_url: REDIS_URL
+  redis_url: REDIS_URL,
+  port: PORT
 };
 
 /** @type {import('@medusajs/medusa').ConfigModule} */

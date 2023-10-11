@@ -13,7 +13,7 @@ export class CategoryFeatures1694697720150 implements MigrationInterface {
             "categoryId" VARCHAR NOT NULL,
             "uniqueName" TEXT NOT NULL,
             "vector" vector(384),
-            "metadata" JSONB NOT NULL,
+            "metadata" JSONB NULL,
         
             CONSTRAINT "category_features_pkey" PRIMARY KEY ("categoryId")
         )`);
