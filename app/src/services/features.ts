@@ -41,6 +41,7 @@ export default class FeaturesService extends TransactionBaseService {
 
     async retrieveForCustomer(customerId: any) {
         const queryRunner = await this.activeManager_.connection.createQueryRunner();
+        await queryRunner.connect();
         const product: ProductPreviewType[] = await queryRunner
             .query(`
                     SELECT 
@@ -50,12 +51,18 @@ export default class FeaturesService extends TransactionBaseService {
                        p.thumbnail
                      FROM SP_GET_TOP_SIMILAR_USER_PRODUCTS($1,0.4) p LIMIT 10
             `, [customerId]);
-        return this.getProductWithVariants(product, queryRunner);
+        const results =  this.getProductWithVariants(product, queryRunner);
+        await queryRunner.commitTransaction();
+        await queryRunner.release();
+        return results;
     }
 
 
     async retrieveForContent(productId: any) {
+        console.log("function ok");
         const queryRunner = await this.activeManager_.connection.createQueryRunner();
+        await queryRunner.connect();
+        await queryRunner.startTransaction();
         const product: ProductPreviewType[] = await queryRunner
             .query(`
                     SELECT 
@@ -65,7 +72,11 @@ export default class FeaturesService extends TransactionBaseService {
                        p.thumbnail
                      FROM SP_GET_TOP_SIMILAR_PRODUCTS($1,0.4) p LIMIT 10
             `, [productId]);
-        return this.getProductWithVariants(product, queryRunner);
+        console.log("did get product similar");
+        const results =  this.getProductWithVariants(product, queryRunner);
+        await queryRunner.commitTransaction();
+        await queryRunner.release();
+        return results;
     }
 
     private async getProductWithVariants(product: ProductPreviewType[], queryRunner: QueryRunner) {

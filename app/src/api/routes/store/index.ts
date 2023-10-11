@@ -34,8 +34,9 @@ export function attachStoreRoutes(storeRouter: Router) {
         const id = req.params.id;
 
         const featureService: FeaturesService = req.scope.resolve("featuresService");
-
+        console.log("request ok");
         const results = await featureService.retrieveForContent(id);
+        console.log("results",results);
         res.status(200).json({
             recommended: results
         });
